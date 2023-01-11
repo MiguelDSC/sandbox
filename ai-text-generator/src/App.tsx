@@ -27,6 +27,7 @@ function App() {
 
     setGeneratedText(result);
     setIsLoading(false);
+    setEnteredText("");
   };
 
   return (
@@ -46,6 +47,7 @@ function App() {
                 }}
                 type="text"
                 placeholder="Enter a description for your text"
+                value={enteredText}
               />
               <button>Generate</button>
             </form>

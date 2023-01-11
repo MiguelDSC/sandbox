@@ -2,32 +2,34 @@ import express, { json } from "express";
 import cors from "cors";
 import axios from "axios";
 import dotenv from "dotenv";
+import { OpenAIApi, Configuration } from "openai";
 
 dotenv.config();
-
 const app = express();
 const PORT = process.env.PORT || 3500;
 app.use(cors());
 app.use(express.json());
 
-app.post("/generate-text", (req, res) => {
-  console.log(req.body.description);
+const configuration = new Configuration({
+  apiKey: process.env.API_KEY_OPENAI,
+});
+
+const openai = new OpenAIApi(configuration);
+
+app.post("/generate-text", async (req, res) => {
   const description = req.body.description;
 
-  //   const generatedText = axios
-  //     .post("/user", {
-  //       firstName: "Fred",
-  //       lastName: "Flintstone",
-  //     })
-  //     .then(function (response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
+  const response = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: `write a text about ${description}`,
+    temperature: 0.4,
+    max_tokens: 64,
+    top_p: 1,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+  });
 
-  console.log(description);
-  res.send(description);
+  res.send(response.data.choices[0].text);
 });
 
 app.listen(PORT, () => {
