@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+}
+
+.input {
+  width: 100%;
+}
+
+.output {
+  width: 500px;
+  border: 1px solid white;
+  height: 100%;
+  /* min-height: 100px; */
+  color: white;
+}
