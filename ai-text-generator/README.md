@@ -6,7 +6,7 @@
 
 ## General info
 
-This project makes use of the openAI-API and generates texts based on a given description(2022-2023), and was made with
+This project makes use of the openAI-API and generates text based on a given description.
 
 ## Technologies
 
